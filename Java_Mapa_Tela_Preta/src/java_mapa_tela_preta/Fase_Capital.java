@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Flavio
+ * @author Bianca
  */
 public class Fase_Capital extends Capital{
     
@@ -35,9 +35,10 @@ public class Fase_Capital extends Capital{
     private Pontuacao Pontos;
     private String Palavras[];
     private boolean Fim_Da_Fase;
+    private Base_De_Dados BaseD;
     
-    Fase_Capital(){
-     
+    Fase_Capital() throws IOException  {
+     BaseD = new Base_De_Dados();   
      Fim_Da_Fase = false;        
      Lista_De_Siglas = new ArrayList();   
      Lista_De_Regioes = new ArrayList();
@@ -59,39 +60,46 @@ public class Fase_Capital extends Capital{
        Pontos = a;
     
     }
-        private void Carrega_Mapa(){
+        private void Carrega_Mapa() throws IOException {// mudanca ocorreu aqui
+        
+            String aux=null;
+            String cidade=null,regiao=null;
             
-            Carrega_Mapa_Aqui("RioBranco", "Norte");
-            Carrega_Mapa_Aqui("Macapa", "Norte");
-            
-            Carrega_Mapa_Aqui("Curitiba", "Sul");
-            Carrega_Mapa_Aqui("PortoAlegre", "Sul");
-            
-            Carrega_Mapa_Aqui("BeloHorizonte", "Sudeste");
-            Carrega_Mapa_Aqui("RioDeJaneiro", "Sudeste");
-            
+             
+           for(int i = 1; i <= BaseD.TamanhoArq("Capital") ; i++){
+                aux = BaseD.RetornaBase(i,"Capital");
+             
+                cidade = aux.substring(0, aux.indexOf(';'));
+
+                regiao = aux.substring(aux.indexOf(';') + 1,aux.length());
+               
+                
+                Carrega_Mapa_Aqui(cidade,regiao);
+          }
             
         }
+    /*    Foi para Class Base De Dados 
+        public void Adiciona_Regiao(String Regiao_Aux2,String Sigla_Aux2) throws IOException{
         
-        public void Adiciona_Regiao(String Regiao_Aux2,String Sigla_Aux2){
-        
+            BaseD.EscreveArquivo(Regiao_Aux2,Sigla_Aux2);
             Carrega_Mapa_Aqui(Regiao_Aux2, Sigla_Aux2);
         
         }
-            
+    */            
     
     
-    public void Comeca_Game() throws IOException{
-    
+    public void Comeca_Game(){
+        
     int controlaLoop =0 ;    
     String capital,regiao;
   
        System.out.println("-------------------------- Fase 2 ----------------------");
        System.out.println("Regras da Fase:");
        System.out.println("O jogador tem que selecionar uma Capital e dizer se esta esta pertence a uma Regiao.");
+       System.out.println("Acertos de Primeira: 2 pontos  \\ Acertos com mais de uma tentativa: 1 ponto");
        
        
-       int tamanhoLista=Retorna_Tamanho_Lista();
+       int tamanhoLista = Retorna_Tamanho_Lista();
                
        while(controlaLoop < tamanhoLista){
         
@@ -122,14 +130,18 @@ public class Fase_Capital extends Capital{
     
                Pontos.Muda_Flag_Erro();
                
-        }
-        
-           System.out.println("Você fez: " + Pontos.Retorna_Pontuacao() +" Pontos.");
-      
-        
-               }// Fim While
+         }
+                 if(Pontos.Retorna_Flag() == true){
+                     System.out.println("Você fez: " + Pontos.Valor_Da_Questao +" Pontos.");
+                 }else{
+                     System.out.println("Você errou!!!");
+                 }
+                 
        
-         
+       }// Fim Loop
+       
+               System.out.println("Nessa Fase o Jogador fez: " + Pontos.Retorna_Pontuacao() +" Pontos.");
+               System.out.println("Numero de Tentativas " + Pontos.GetTentativas());
        
         Fim_Da_Fase = true;
     }

@@ -9,18 +9,20 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Flavio
+ * @author Bianca
  */
 public class Capital {
     
-    private int anda;
-    private String Capital_Aux;
-    private String Regiao;
+
+    
+    //private String Capital_Aux;
+    private String nomeCapital;
+    private String estadoCorrespondente;
     ArrayList<Capital> ArrayCapital;
 
     
     Capital(){
-        anda =0;            
+           
         ArrayCapital = new ArrayList();
     }
     
@@ -28,8 +30,8 @@ public class Capital {
        
        Capital a = new Capital();
         
-       a.Regiao = Regiao_Aux;
-       a.Capital_Aux = Capital_Aux2; 
+       a.estadoCorrespondente = Regiao_Aux;
+       a.nomeCapital = Capital_Aux2; 
        
        ArrayCapital.add(a);
        
@@ -42,7 +44,7 @@ public class Capital {
         
         for(int i = 0 ; i < ArrayCapital.size() ;i++){
             
-          if(ArrayCapital.get(i).Regiao.contentEquals(Regiao_Aux2)== true && ArrayCapital.get(i).Capital_Aux.contentEquals(Capital_Aux) == true){
+          if(ArrayCapital.get(i).estadoCorrespondente.contentEquals(Regiao_Aux2)== true && ArrayCapital.get(i).nomeCapital.contentEquals(Capital_Aux) == true){
               return true;
           }
        }
@@ -58,7 +60,7 @@ public class Capital {
         for(int i = 0; i< ArrayCapital.size(); i++) {   
        
   
-         System.out.println(ArrayCapital.get(i).Capital_Aux + "      ||      "+ ArrayCapital.get(i).Regiao);
+         System.out.println(ArrayCapital.get(i).nomeCapital + "      ||     "+ ArrayCapital.get(i).estadoCorrespondente);
               
         }
     }
@@ -70,13 +72,13 @@ public class Capital {
      
     public String Retorna_Sigla(int Index){
         
-        return ArrayCapital.get(Index).Regiao;
+        return ArrayCapital.get(Index).estadoCorrespondente;
     }
     
     
     public String Retorna_Regiao(int Index){
         
-        return ArrayCapital.get(Index).Capital_Aux;
+        return ArrayCapital.get(Index).nomeCapital;
     }
     
   
@@ -85,7 +87,7 @@ public class Capital {
 
         for(int i = 0 ; i < ArrayCapital.size() ;i++){
             
-          if(ArrayCapital.get(i).Capital_Aux.contentEquals(Regiao_Aux2)== true){
+          if(ArrayCapital.get(i).nomeCapital.contentEquals(Regiao_Aux2)== true){
             
             ArrayCapital.remove(i);
             
