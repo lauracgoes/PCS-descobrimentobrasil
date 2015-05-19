@@ -1,0 +1,13 @@
+Relatório de atividades Fase 3:
+
+Inclusão da classe "Base de Dados" com implementação de Arquivo - Laura e Bianca
+Inclusão da classe "Pontuação" com implementação de Arquivo - Flavio
+
+Alteração das Classes Mestre_De_Jogo e Estado: Flávio
+Alteração das Estado, Capital, Fase_Capital: Bianca
+Alteração das Classes Região e Fase_Região: Laura
+
+Atualização Doc. Casos de Uso (v3.0) : Laura
+
+Diagrama de Classes: Pendente.
+
